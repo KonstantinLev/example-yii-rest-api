@@ -1,7 +1,7 @@
 <?php
 
+use common\rbac\Rbac;
 use yii\helpers\Html;
-use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
@@ -12,9 +12,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-view">
 
-    <p class="pull-right">
-        <?= Html::a('Profile', ['profile/index'], ['class' => 'btn btn-primary']) ?>
-    </p>
+    <?php if (Yii::$app->user->can(Rbac::MANAGE_PROFILE, ['user' => $model])): ?>
+        <p class="pull-right">
+            <?= Html::a('Profile', ['profile/index'], ['class' => 'btn btn-primary']) ?>
+        </p>
+    <?php endif; ?>
 
     <h1><?= Html::encode($this->title) ?></h1>
 
