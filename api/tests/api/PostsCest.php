@@ -34,6 +34,19 @@ class PostsCest
         $I->seeHttpHeader('X-Pagination-Total-Count', 3);
     }
 
+    public function search(ApiTester $I)
+    {
+        $I->sendGET('/posts?s[title]=Sec');
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson([
+            ['title' => 'Second Post'],
+        ]);
+        $I->dontSeeResponseContainsJson([
+            ['title' => 'First Post'],
+        ]);
+        $I->seeHttpHeader('X-Pagination-Total-Count', 1);
+    }
+
     public function view(ApiTester $I)
     {
         $I->sendGET('/posts/1');
