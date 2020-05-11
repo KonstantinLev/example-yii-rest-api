@@ -48,4 +48,16 @@ class ProfileCest
         $I->sendGET('/profile');
         $I->seeResponseCodeIs(401);
     }
+
+    public function update(ApiTester $I)
+    {
+        $I->amBearerAuthenticated('token-correct');
+        $I->sendPATCH('/profile', [
+            'email' => $email = 'new_email@mail.com',
+        ]);
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson([
+            'email' => $email,
+        ]);
+    }
 }
