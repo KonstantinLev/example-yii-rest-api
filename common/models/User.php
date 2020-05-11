@@ -226,6 +226,15 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasMany(Token::className(), ['user_id' => 'id']);
     }
 
+    public function fields()
+    {
+        return [
+            'id' => 'id',
+            'username' => 'username',
+            'email' => 'email',
+        ];
+    }
+
     /**
      * @return UserQuery
      */
