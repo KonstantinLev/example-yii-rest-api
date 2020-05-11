@@ -50,6 +50,11 @@ return [
                 '' => 'site/index',
                 'auth' => 'site/login',
                 'GET profile' => 'profile/index',
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'post',
+                    'only' => ['index', 'view', 'options'],
+                ],
             ],
         ],
     ],
