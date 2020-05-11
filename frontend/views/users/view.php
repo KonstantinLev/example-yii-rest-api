@@ -2,6 +2,7 @@
 
 use common\rbac\Rbac;
 use yii\helpers\Html;
+use frontend\widgets\LastUserPosts;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
@@ -29,5 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
             </ul>
         </div>
     </div>
+
+    <p class="pull-right">
+        <?= Html::a('Create Post', ['user-posts/create', 'user_id' => $model->id], ['class' => 'btn btn-success']) ?>
+    </p>
+
+    <h2>My Recent Posts</h2>
+
+    <?= LastUserPosts::widget([
+        'user' => $model,
+    ]) ?>
 
 </div>
